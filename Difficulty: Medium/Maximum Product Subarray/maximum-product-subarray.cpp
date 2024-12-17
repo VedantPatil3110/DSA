@@ -1,0 +1,60 @@
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+// } Driver Code Ends
+// User function Template for C++
+class Solution {
+  public:
+    // Function to find maximum product subarray
+    int maxProduct(vector<int> &arr) {
+        int n=arr.size();
+        int cmx=arr[0];
+        int cmi=arr[0];
+        int mp=arr[0];
+        for(int i=1;i<n;i++){
+            int temp=max({arr[i],cmx*arr[i],cmi*arr[i]});
+            cmi=min({arr[i],cmx*arr[i],cmi*arr[i]});
+            cmx=temp;
+            mp=max(mp,cmx);
+        }
+        return mp;
+    }
+};
+
+//{ Driver Code Starts.
+
+int main() {
+    int t;
+    cin >> t;
+    cin.ignore();
+    while (t--) {
+        // int n, i;
+        // cin >> n;
+        // vector<int> arr(n);
+        // for (i = 0; i < n; i++) {
+        //     cin >> arr[i];
+        // }
+
+        vector<int> arr;
+        string input;
+
+        // Read array
+        getline(cin, input);
+        stringstream ss(input);
+        int number;
+        while (ss >> number) {
+            arr.push_back(number);
+        }
+        Solution ob;
+        auto ans = ob.maxProduct(arr);
+        cout << ans << "\n";
+
+        cout << "~"
+             << "\n";
+    }
+    return 0;
+}
+// } Driver Code Ends
