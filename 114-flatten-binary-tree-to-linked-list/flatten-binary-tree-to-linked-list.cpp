@@ -32,20 +32,49 @@ public:
         // int i=0;
         // int n=ans.size()-1;
         // connection(ans,i,n);
+
+
+        // if(root==NULL){
+        //     return;
+        // }
+        // TreeNode*l=root->left;
+        // TreeNode*r=root->right;
+        // root->left=NULL;
+        // root->right=NULL;
+        // flatten(l);
+        // flatten(r);
+        // root->right=l;
+        // TreeNode*temp=root;
+        // while(temp->right!=NULL){
+        //     temp=temp->right;
+        // }
+        // temp->right=r;
         if(root==NULL){
             return;
         }
-        TreeNode*l=root->left;
-        TreeNode*r=root->right;
-        root->left=NULL;
-        root->right=NULL;
-        flatten(l);
-        flatten(r);
-        root->right=l;
-        TreeNode*temp=root;
-        while(temp->right!=NULL){
-            temp=temp->right;
+        TreeNode*curr=root;
+        while(curr!=NULL){
+            if(curr->left!=NULL){
+                // save the right
+                TreeNode*r=curr->right;
+                curr->right=curr->left;
+                // find predessesor
+                TreeNode*pred=curr->left;
+                while(pred->right!=NULL){
+                    pred=pred->right;
+                }
+                // link
+                pred->right=r;
+                curr=curr->left;
+            }
+            else{
+                curr=curr->right;
+            }
         }
-        temp->right=r;
+        TreeNode*temp=root;
+            while(temp->right!=NULL){
+                temp->left=NULL;
+                temp=temp->right;
+            }
     }
 };
