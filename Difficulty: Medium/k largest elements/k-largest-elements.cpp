@@ -8,13 +8,15 @@ using namespace std;
 class Solution {
   public:
     vector<int> kLargest(vector<int>& arr, int k) {
-        sort(arr.begin(),arr.end());
-        int n=arr.size();
-        vector<int>ans;
-        for(int i=n-k;i<n;i++){
-            ans.push_back(arr[i]);
+        priority_queue<int>p;
+        for(int i=0;i<arr.size();i++){
+            p.push(arr[i]);
         }
-        reverse(ans.begin(),ans.end());
+        vector<int>ans;
+        for(int i=0;i<k;i++){
+            ans.push_back(p.top());
+            p.pop();
+        }
         return ans;
     }
 };
