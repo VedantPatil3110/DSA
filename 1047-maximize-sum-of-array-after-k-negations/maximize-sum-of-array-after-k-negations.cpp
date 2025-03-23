@@ -7,6 +7,9 @@ public:
         }
         for(int i=0;i<k;i++){
             int x=-(p.top());
+            if(x==0){
+                break;
+            }
             p.pop();
             p.push(x);
         }
