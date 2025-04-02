@@ -8,12 +8,34 @@ using namespace std;
 class Solution {
   public:
     int search(vector<int>& arr, int key) {
-       for(int i=0;i<arr.size();i++){
-           if(arr[i]==key){
-               return i;
-           }
-       }
-       return -1;
+        // Code Here
+        int i=0;
+        int j=arr.size()-1;
+        if(arr[i]==key){
+            return i;
+        }
+        if(arr[j]==key){
+            return j;
+        }
+        while(i<=j){
+            int mid=i+(j-i)/2;
+            if(arr[mid]==key){
+                return mid;
+            }
+            if(arr[i]==key){
+                return i;
+            }
+            if(arr[j]==key){
+                return j;
+            }
+            if(arr[mid]>arr[i]){
+                i++;
+            }
+            else{
+                j--;
+            }
+        }
+        return -1;
     }
 };
 
