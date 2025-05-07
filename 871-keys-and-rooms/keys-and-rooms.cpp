@@ -8,10 +8,10 @@ public:
         while(!q.empty()){
             int curr=q.front();
             q.pop();
-            for(int neighbour:rooms[curr]){
-                if(visited.count(neighbour)==0){
-                    q.push(neighbour);
-                    visited.insert(neighbour);
+            for(int neighbor:rooms[curr]){
+                if(visited.count(neighbor)==0){
+                    q.push(neighbor);
+                    visited.insert(neighbor);
                 }
             }
         }
