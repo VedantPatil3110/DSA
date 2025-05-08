@@ -118,11 +118,11 @@ bool compare(Node* prev, Node* new_node, unordered_set<Node*>& prev_vis,
 class Solution {
   public:
   unordered_map<int,Node*>mp;
-  void dfs(Node*actual,Node*clone){
-      for(auto neighbor:actual->neighbors){
-          if(mp[neighbor->val]==NULL){
+  void dfs(Node*node,Node*clone){
+      for(auto neighbor:node->neighbors){
+          if(mp.find(neighbor->val)==mp.end()){
               Node*a=new Node(neighbor->val);
-              mp[neighbor->val]=a;
+              mp[a->val]=a;
               clone->neighbors.push_back(a);
               dfs(neighbor,a);
           }
@@ -136,7 +136,6 @@ class Solution {
             return NULL;
         }
         Node*clone=new Node(node->val);
-        // r.resize(1000,NULL);
         mp[clone->val]=clone;
         dfs(node,clone);
         return clone;
