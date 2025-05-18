@@ -8,14 +8,15 @@ using namespace std;
 class Solution {
   public:
     vector<int> kLargest(vector<int>& arr, int k) {
-        priority_queue<int>p;
+        priority_queue<int>pq;
         for(int i=0;i<arr.size();i++){
-            p.push(arr[i]);
+            pq.push(arr[i]);
         }
         vector<int>ans;
-        for(int i=0;i<k;i++){
-            ans.push_back(p.top());
-            p.pop();
+        while(k){
+            ans.push_back(pq.top());
+            pq.pop();
+            k--;
         }
         return ans;
     }
