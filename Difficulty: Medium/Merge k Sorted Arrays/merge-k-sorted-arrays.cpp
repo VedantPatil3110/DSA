@@ -13,27 +13,24 @@ for (int i=0; i < size; i++)
 
 // } Driver Code Ends
 
-//User function Template for C++
+// User function Template for C++
 
-
-class Solution
-{
-    public:
-    //Function to merge k sorted arrays.
-    vector<int> mergeKArrays(vector<vector<int>> arr, int K)
-    {
-        priority_queue<int,vector<int>,greater<int>>p;
-        for(int i=0;i<K;i++){
-            for(int j=0;j<K;j++){
-                p.push(arr[i][j]);
-            }
-        }
-        vector<int>ans;
-        while(!p.empty()){
-            ans.push_back(p.top());
-            p.pop();
-        }
-        return ans;
+class Solution {
+  public:
+    // Function to merge k sorted arrays.
+    vector<int> mergeKArrays(vector<vector<int>> arr, int K) {
+        priority_queue<int,vector<int>,greater<int>>pq;
+       for(int i=0;i<arr.size();i++){
+           for(int j=0;j<K;j++){
+               pq.push(arr[i][j]);
+           }
+       }
+       vector<int>ans(K*K);
+       for(int i=0;i<K*K;i++){
+           ans[i]=(pq.top());
+           pq.pop();
+       }
+       return ans;
     }
 };
 
