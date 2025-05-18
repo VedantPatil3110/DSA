@@ -12,13 +12,13 @@ class Solution {
   public:
     // Function to sort an array using Heap Sort.
     void heapSort(vector<int>& arr) {
-        priority_queue<int>p;
-        for(auto x:arr){
-            p.push(x);
+        priority_queue<int,vector<int>,greater<>>pq;
+        for(int i=0;i<arr.size();i++){
+            pq.push(arr[i]);
         }
-        for(int i=arr.size()-1;i>=0;i--){
-            arr[i]=p.top();
-            p.pop();
+        for(int i=0;i<arr.size();i++){
+            arr[i]=pq.top();
+            pq.pop();
         }
     }
 };
