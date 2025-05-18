@@ -7,23 +7,20 @@ using namespace std;
 
 class Solution {
   public:
-    // Function to return the minimum cost of connecting the ropes.
     int minCost(vector<int>& arr) {
-        int n=arr.size();
-        priority_queue<int,vector<int>,greater<int>>p;
-        for(int i=0;i<n;i++){
-            p.push(arr[i]);
+        priority_queue<int,vector<int>,greater<int>>q;
+        for(int i=0;i<arr.size();i++){
+            q.push(arr[i]);
         }
         int cost=0;
-        while(p.size()>1){
-            int k=0;
-            int sum=0;
-            sum+=p.top();
-            p.pop();
-            sum+=p.top();
-            p.pop();
-            cost+=sum;
-            p.push(sum);
+        while(q.size()>1){
+            int a=q.top();
+            q.pop();
+            int b=q.top();
+            q.pop();
+            int c=a+b;
+            cost+=c;
+            q.push(c);
         }
         return cost;
     }
