@@ -8,15 +8,27 @@ typedef long long int ll;
 
 class Solution {
   public:
+  int solve(int i,vector<int>&arr,vector<int>&dp){
+      if(i>=arr.size()){
+          return 0;
+      }
+      if(dp[i]!=-1){
+          return dp[i];
+      }
+      int take=arr[i]+solve(i+2,arr,dp);
+      int nottake=solve(i+1,arr,dp);
+      return dp[i]=max(take,nottake);
+  }
     int findMaxSum(vector<int>& arr) {
-        int maxi=0;
-        int rob=0;
-        for(int i=0;i<arr.size();i++){
-            int temp=max(maxi,rob+arr[i]);
-            rob=maxi;
-            maxi=temp;
+        int n=arr.size();
+        if(n==0){
+            return 0;
         }
-        return maxi;
+        if(n==1){
+            return arr[0];
+        }
+        vector<int>dp(n+1,-1);
+        return solve(0,arr,dp);
     }
 };
 
