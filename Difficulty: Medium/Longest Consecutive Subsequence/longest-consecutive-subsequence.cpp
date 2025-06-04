@@ -1,64 +1,24 @@
-//{ Driver Code Starts
-#include <bits/stdc++.h>
-
-using namespace std;
-
-
-// } Driver Code Ends
-
 class Solution {
   public:
 
     // Function to return length of longest subsequence of consecutive integers.
     int longestConsecutive(vector<int>& arr) {
+        sort(arr.begin(),arr.end());
         int n=arr.size();
-        set<int>s;
-        int maxi=INT_MIN;
-        int mini=INT_MAX;
-        for(int i=0;i<n;i++){
-            s.insert(arr[i]);
-            maxi=max(maxi,arr[i]);
-            mini=min(mini,arr[i]);
-        }
-        int count=0;
-        int maxcount=-1;
-        for(int i=mini;i<=maxi;i++){
-            if(s.find(i)!=s.end()){
+        int count=1;
+        int maxi=1;
+        for(int i=1;i<n;i++){
+            if(arr[i]-arr[i-1]==1){
                 count++;
-                maxcount=max(maxcount,count);
+            }
+            else if(arr[i]-arr[i-1]==0){
+                continue;
             }
             else{
-                count=0;
+                count=1;
             }
+            maxi=max(count,maxi);
         }
-        return maxcount;
+        return maxi;
     }
 };
-
-
-//{ Driver Code Starts.
-int main() {
-    int t;
-    cin >> t;
-    cin.ignore();
-    while (t--) {
-        vector<int> arr;
-        string input;
-
-        // Read first array
-        getline(cin, input);
-        stringstream ss(input);
-        int number;
-        while (ss >> number) {
-            arr.push_back(number);
-        }
-
-        Solution ob;
-        int res = ob.longestConsecutive(arr);
-
-        cout << res << endl << "~" << endl;
-    }
-    return 0;
-}
-
-// } Driver Code Ends
