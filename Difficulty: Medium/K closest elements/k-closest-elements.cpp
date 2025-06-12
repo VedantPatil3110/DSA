@@ -1,60 +1,32 @@
-//{ Driver Code Starts
-// Initial template for C++
-
-#include <bits/stdc++.h>
-using namespace std;
-
-
-// } Driver Code Ends
-
-// User function template for C++
-
+class compare {
+public:
+bool operator()(pair<int, int>& a, pair<int, int>& b){
+        if (a.first == b.first)
+        {
+            return a.second < b.second;
+        }
+        return a.first > b.first; 
+    }
+};
 class Solution {
   public:
-    vector<int> printKClosest(vector<int> arr, int n, int k, int x) {
-        priority_queue<pair<int,int>>p;
+    vector<int> printKClosest(vector<int> arr, int k, int x) {
+        priority_queue<pair<int,int>,vector<pair<int,int>>,compare>pq;
         for(int i=0;i<arr.size();i++){
-            if(arr[i]!=x){
-                p.push({abs(arr[i]-x),-arr[i]});
-            }
-            if(p.size()>k){
-                p.pop();
-            }
+            int a=abs(arr[i]-x);
+            pq.push({a,arr[i]});
         }
         vector<int>ans;
-        for(int i=0;i<k;i++){
-            ans.push_back(-p.top().second);
-            p.pop();
+        while(k>0){
+            if(pq.top().first==0){
+                pq.pop();
+            }
+            else{
+            ans.push_back(pq.top().second);
+            pq.pop();
+            k--;
+            }
         }
-        reverse(ans.begin(),ans.end());
         return ans;
     }
 };
-
-
-//{ Driver Code Starts.
-
-int main() {
-    int t;
-    cin >> t;
-    while (t--) {
-        int n, k, x;
-        cin >> n;
-        vector<int> arr(n);
-        for (int i = 0; i < n; i++) {
-            cin >> arr[i];
-        }
-        cin >> k >> x;
-        Solution ob;
-        auto ans = ob.printKClosest(arr, n, k, x);
-        for (auto e : ans) {
-            cout << e << " ";
-        }
-        cout << "\n";
-    
-cout << "~" << "\n";
-}
-    return 0;
-}
-
-// } Driver Code Ends
