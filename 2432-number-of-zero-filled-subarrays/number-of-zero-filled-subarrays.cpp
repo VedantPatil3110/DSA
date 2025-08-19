@@ -1,18 +1,14 @@
 class Solution {
 public:
     long long zeroFilledSubarray(vector<int>& nums) {
-        long long sum=0;
-        long long count=0;
-        for(int i=0;i<nums.size();i++){
-            if(nums[i]==0){
-                count++;
-            }
-            else if(nums[i]!=0){
-                sum+=(count*(count+1))/2;
-                count=0;
-            }
+        long long ans = 0, numSubarray = 0;
+        for (auto num : nums) {
+            if (num == 0)
+                numSubarray++;
+            else
+                numSubarray = 0;
+            ans += numSubarray;
         }
-        sum+=(count*(count+1))/2;
-        return sum;
+        return ans;
     }
 };
