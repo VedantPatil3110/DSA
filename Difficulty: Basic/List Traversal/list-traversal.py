@@ -1,0 +1,3 @@
+def listTraversal(arr):
+    for i in range(len(arr)):
+        print(arr[i],end=" ")
