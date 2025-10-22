@@ -1,52 +1,21 @@
-//{ Driver Code Starts
-#include <bits/stdc++.h>
-using namespace std;
-
-
-// } Driver Code Ends
-
 class Solution {
   public:
     void nearlySorted(vector<int>& arr, int k) {
-       int n=arr.size();
-       priority_queue<int>p;
-       for(int i=0;i<n;i++){
-           p.push(arr[i]);
-       }
-       for(int i=n-1;i>=0;i--){
-           arr[i]=p.top();
-           p.pop();
-       }
+        priority_queue<int,vector<int>,greater<int>>pq;
+        vector<int>v;
+        int n=arr.size();
+        for(int i=0;i<n;i++){
+            pq.push(arr[i]);
+            if(pq.size()>k){
+                v.push_back(pq.top());
+                pq.pop();
+            }
+        }
+        while(!pq.empty()){
+            v.push_back(pq.top());
+            pq.pop();
+        }
+        arr.clear();
+        arr=v;
     }
 };
-
-
-//{ Driver Code Starts.
-
-int main() {
-    string ts;
-    getline(cin, ts);
-    int t = stoi(ts);
-    while (t--) {
-        vector<int> arr;
-        string input;
-        getline(cin, input);
-        stringstream ss(input);
-        int number;
-        while (ss >> number) {
-            arr.push_back(number);
-        }
-        string ks;
-        getline(cin, ks);
-        int k = stoi(ks);
-        Solution obj;
-        obj.nearlySorted(arr, k);
-        for (int i = 0; i < arr.size(); i++) {
-            cout << arr[i] << " ";
-        }
-        cout << endl;
-        cout << "~" << endl;
-    }
-    return 0;
-}
-// } Driver Code Ends
