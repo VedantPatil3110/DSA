@@ -2,24 +2,28 @@ class Solution {
   public:
     int celebrity(vector<vector<int>>& mat) {
         int n=mat.size();
+        stack<int>st;
         for(int i=0;i<n;i++){
-            bool flag1=false;
-            bool flag2=true;
-            for(int j=0;j<n;j++){
-                if(i==j){
-                    continue;
-                }
-                if(mat[i][j]==1){
-                    flag1=true;
-                }
-                if(mat[j][i]==0){
-                    flag2=false;
-                }
+            st.push(i);
+        }
+        while(st.size()>1){
+            int a=st.top();
+            st.pop();
+            int b=st.top();
+            st.pop();
+            if(mat[a][b]==1){
+                st.push(b);
             }
-            if(!flag1 && flag2){
-                return i;
+            else{
+                st.push(a);
             }
         }
-        return -1;
+        int ans=st.top();
+        for(int i=0;i<n;i++){
+            if(i!=ans && (mat[i][ans]==0 || mat[ans][i]==1)){
+                return -1;
+            }
+        }
+        return ans;
     }
 };
