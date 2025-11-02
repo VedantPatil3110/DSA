@@ -1,0 +1,1 @@
+SELECT S.year,S.price,P.product_name FROM Sales S LEFT JOIN Product P ON S.product_id=P.product_id;
