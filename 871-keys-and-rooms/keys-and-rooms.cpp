@@ -1,21 +1,21 @@
 class Solution {
 public:
     bool canVisitAllRooms(vector<vector<int>>& rooms) {
-        unordered_set<int>visited;
         queue<int>q;
+        set<int>vis;
         q.push(0);
-        visited.insert(0);
+        vis.insert(0);
         while(!q.empty()){
             int curr=q.front();
             q.pop();
-            for(int neighbor:rooms[curr]){
-                if(visited.count(neighbor)==0){
-                    q.push(neighbor);
-                    visited.insert(neighbor);
+            for(int x:rooms[curr]){
+                if(vis.find(x)==vis.end()){
+                    q.push(x);
+                    vis.insert(x);
                 }
             }
         }
-        if(visited.size()==rooms.size()){
+        if(vis.size()==rooms.size()){
             return true;
         }
         return false;
