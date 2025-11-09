@@ -21,28 +21,28 @@ public:
 
 class Solution {
 public:
-vector<Node*>registe;
+vector<Node*>vis;
 void dfs(Node*actual,Node*clone){
-    for(auto neighbor:actual->neighbors){
-        if(registe[neighbor->val]==NULL){
-            Node* a=new Node(neighbor->val);
-            registe[a->val]=a;
-            clone->neighbors.push_back(a);
-            dfs(neighbor,a);
+    for(auto x:actual->neighbors){
+        if(vis[x->val]==NULL){
+            Node*n=new Node(x->val);
+            vis[n->val]=n;
+            clone->neighbors.push_back(n);
+            dfs(x,n);
         }
         else{
-            clone->neighbors.push_back(registe[neighbor->val]);
+            clone->neighbors.push_back(vis[x->val]);
         }
     }
 }
     Node* cloneGraph(Node* node) {
-         if(node==NULL){
+        if(node==NULL){
             return NULL;
-         }
-         Node*clone=new Node(node->val);
-         registe.resize(110,NULL);
-         registe[clone->val]=clone;
-         dfs(node,clone);
-         return clone;
+        }
+        Node*clone=new Node(node->val);
+        vis.resize(110,NULL);
+        vis[clone->val]=clone;
+        dfs(node,clone);
+        return clone;
     }
 };
