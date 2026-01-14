@@ -1,34 +1,29 @@
 class Solution {
   public:
     int catchThieves(vector<char> &arr, int k) {
+        int i=0;
+        int j=0;
         int count=0;
         int n=arr.size();
-        int ans=0;
-        int p=0;
-        int t=0;
-        while(p<n && t<n){
-            while(p<n && arr[p]!='P'){
-                p++;
+        while(i<n && j<n){
+            while(i<n && arr[i]!='P'){
+                i++;
             }
-            while(t<n && arr[t]!='T'){
-                t++;
+            while(j<n && arr[j]!='T'){
+                j++;
             }
-            if(p<n && t<n){
-                if(abs(p-t)<=k){
-                    ans++;
-                    p++;
-                    t++;
-                }
-                else{
-                    if(p>t){
-                        t++;
-                    }
-                    else{
-                        p++;
-                    }
-                }
+            if(i<n && j<n && abs(i-j)<=k){
+                count++;
+                i++;
+                j++;
+            }
+            else if(i<n && j<n && i<j){
+                i++;
+            }
+            else{
+                j++;
             }
         }
-        return ans;
+        return count;
     }
 };
