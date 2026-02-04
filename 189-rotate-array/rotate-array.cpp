@@ -3,11 +3,13 @@ public:
     void rotate(vector<int>& nums, int k) {
         int n=nums.size();
         if(k>n){
-            k=k%n;
+            k%=n;
         }
-        int m=n-k;
-        reverse(nums.begin(),nums.begin()+m);
-        reverse(nums.begin()+m,nums.end());
+        if(k==n){
+            return;
+        }
         reverse(nums.begin(),nums.end());
+        reverse(nums.begin(),nums.begin()+k);
+        reverse(nums.begin()+k,nums.end());   
     }
 };
