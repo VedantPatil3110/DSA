@@ -11,26 +11,28 @@
  */
 class Solution {
 public:
-void inorder(TreeNode*root,vector<TreeNode*>&ans){
+void inorder(TreeNode*root,vector<TreeNode*>&in){
     if(root==NULL){
         return;
     }
-    inorder(root->left,ans);
-    ans.push_back(root);
-    inorder(root->right,ans);
+    inorder(root->left,in);
+    in.push_back(root);
+    inorder(root->right,in);
 }
-TreeNode*connection(int l,int h,vector<TreeNode*>&ans){
-    if(l>h){
+TreeNode* make(vector<TreeNode*>&in,int i,int j){
+    if(i>j){
         return NULL;
     }
-    int mid=(l+h)/2;
-    ans[mid]->left=connection(l,mid-1,ans);
-    ans[mid]->right=connection(mid+1,h,ans);
-    return ans[mid];
-    }
+    int mid=i+(j-i)/2;
+    TreeNode*root=in[mid];
+    root->left=make(in,i,mid-1);
+    root->right=make(in,mid+1,j);
+    return root;
+}
     TreeNode* balanceBST(TreeNode* root) {
-        vector<TreeNode*>ans;
-        inorder(root,ans);
-        return connection(0,ans.size()-1,ans);
+        vector<TreeNode*>in;
+        inorder(root,in);
+        int n=in.size();
+        return make(in,0,n-1);
     }
 };
