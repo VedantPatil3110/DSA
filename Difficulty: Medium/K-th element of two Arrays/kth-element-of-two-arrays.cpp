@@ -1,41 +1,45 @@
 class Solution {
   public:
     int kthElement(vector<int> &a, vector<int> &b, int k) {
+        int ans=0;
         int i=0;
         int j=0;
         int n=a.size();
         int m=b.size();
-        int h=0;
-        vector<int>arr(m+n);
-        if(k>m+n){
-            return -1;
-        }
-        while(i<n && j<m){
+        while(i<n && j<m && k>0){
             if(a[i]<b[j]){
-                arr[h]=a[i];
-                h++;
+                ans=a[i];
                 i++;
             }
             else{
-                arr[h]=b[j];
-                h++;
+                ans=b[j];
                 j++;
             }
+            k--;
         }
-        if(i<n && j>=m){
-            while(i<n){
-                arr[h]=a[i];
+        if(k==0){
+            return ans;
+        }
+        if(k>0 && i>=n && j<m){
+            while(k>0 && j<m){
+                ans=b[j];
+                j++;
+                k--;
+            }
+            if(k==0){
+                return ans;
+            }
+        }
+        if(k>0 && i<n && j>=m){
+            while(k>0 && i<n){
+                ans=a[i];
                 i++;
-                h++;
+                k--;
+            }
+            if(k==0){
+                return ans;
             }
         }
-        if(i>=n && j<m){
-            while(j<m){
-                arr[h]=b[j];
-                j++;
-                h++;
-            }
-        }
-        return arr[k-1];
+        return -1;
     }
 };
